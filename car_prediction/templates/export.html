@@ -1,0 +1,28 @@
+{% extends 'side-bar.html' %} {% block content %}
+<div class="container-fluid">
+  <div class="card shadow mb-4">
+    <div class="card-header py-3 bg-gradient-light">
+      <h5 class="m-0 font-weight-bold text-danger">Export Data</h5>
+    </div>
+    <div class="card-body bg-gradient-secondary">
+      {% if message %}
+      <div class="alert alert-success">{{ message }}</div>
+      {% endif %}
+      <p>Exporting from database.</p>
+      <form method="post" enctype="multipart/form-data" style="color: #fff">
+        {% csrf_token %}
+        <p>Please select format of file.</p>
+        <select name="file-format" class="form-control my-3">
+          <option selected>Choose format...</option>
+          <option>CSV</option>
+          <option>JSON</option>
+          <option>XLS (Excel)</option>
+        </select>
+        <button class="btn btn-primary" type="submit">Export</button>
+        <a href="/data" class="btn btn-danger">Back</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

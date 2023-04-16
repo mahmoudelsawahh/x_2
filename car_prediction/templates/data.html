@@ -1,0 +1,95 @@
+{% extends 'side-bar.html' %} {% block content %}
+<!-- DataTales Example -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Data Table of Car</h1>
+
+  <div class="card shadow mb-4 bg-gradient-secondary">
+    <div class="card-header bg-gradient-light py-3">
+      <div style="text-align: left">
+        <a
+          href="{% url 'add_data' %}"
+          class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"
+          style="font-size: 20px; font-weight: bold"
+          ><i class="fas fa-sm text-white-50"></i> Add New Data</a
+        >
+        <a
+          href="{% url 'export_data' %}"
+          class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"
+          style="font-size: 20px; font-weight: bold"
+          ><i class="fas fa-download fa-sm text-white-50"></i> Export Data
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table
+          class="table table-bordered"
+          id="table_id"
+          width="100%"
+          cellspacing="0"
+          style="color: #fff"
+        >
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Year</th>
+              <th>Transmission</th>
+              <th>Mile Age</th>
+              <th>Fuel Type</th>
+              <th>Tax</th>
+              <th>MPG</th>
+              <th>Engine Size</th>
+              <th>Price (£)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>Model</th>
+              <th>Year</th>
+              <th>Transmission</th>
+              <th>Mile Age</th>
+              <th>Fuel Type</th>
+              <th>Tax</th>
+              <th>MPG</th>
+              <th>Engine Size</th>
+              <th>Price (£)</th>
+              <th>Action</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            {% for car in cars %}
+            <tr>
+              <td>{{ car.model }}</td>
+              <td>{{ car.year }}</td>
+              <td>{{ car.transmission }}</td>
+              <td>{{ car.mileage }}</td>
+              <td>{{ car.fuel_type }}</td>
+              <td>{{ car.tax }}</td>
+              <td>{{ car.mpg }}</td>
+              <td>{{ car.engine_size }}</td>
+              <td>€ {{ car.price }}</td>
+              <td>
+                <a
+                  href="{% url 'edit_data' car.id %}"
+                  class="btn btn-primary btn-circle btn-sm"
+                >
+                  <i class="fas fa-edit"></i>
+                </a>
+                <a
+                  href="{% url 'delete_data' car.id %}"
+                  class="btn btn-danger btn-circle btn-sm"
+                >
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
